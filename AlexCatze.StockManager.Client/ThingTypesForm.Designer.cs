@@ -31,6 +31,7 @@ namespace AlexCatze.StockManager.Client
         {
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.back = new System.Windows.Forms.Button();
+            this.dataGrid1 = new System.Windows.Forms.DataGrid();
             this.SuspendLayout();
             // 
             // back
@@ -42,12 +43,21 @@ namespace AlexCatze.StockManager.Client
             this.back.Text = "Назад";
             this.back.Click += new System.EventHandler(this.back_Click);
             // 
+            // dataGrid1
+            // 
+            this.dataGrid1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.dataGrid1.Location = new System.Drawing.Point(3, 3);
+            this.dataGrid1.Name = "dataGrid1";
+            this.dataGrid1.Size = new System.Drawing.Size(235, 200);
+            this.dataGrid1.TabIndex = 1;
+            // 
             // ThingTypesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(238, 295);
+            this.Controls.Add(this.dataGrid1);
             this.Controls.Add(this.back);
             this.Menu = this.mainMenu1;
             this.Name = "ThingTypesForm";
@@ -59,5 +69,6 @@ namespace AlexCatze.StockManager.Client
         #endregion
 
         private System.Windows.Forms.Button back;
+        private System.Windows.Forms.DataGrid dataGrid1;
     }
 }

@@ -17,8 +17,8 @@ if (!app.Environment.IsDevelopment())
 }
 
 
-
-app.UseHttpsRedirection();
+app.UseHttpLogging();
+//app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseStatusCodePages();
 app.UseRouting();
