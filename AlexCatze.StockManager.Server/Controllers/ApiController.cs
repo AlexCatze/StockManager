@@ -35,6 +35,9 @@ namespace AlexCatze.StockManager.Server.Controllers
                 return BadRequest();
             }
 
+            var exist = await _context.Things.Where(t => t.Id == thing.Id).FirstOrDefaultAsync();
+            if (exist != null)
+            _context.Things.Remove(exist);
             _context.Things.Add(thing);
             await _context.SaveChangesAsync();
 
