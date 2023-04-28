@@ -1,6 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+using System.Net;
+using System.IO;
 
 namespace AlexCatze.StockManager.Client
 {
@@ -11,7 +15,7 @@ namespace AlexCatze.StockManager.Client
         {
             try
             {
-                WebRequest request = WebRequest.Create(Program.server_address + endpoint);
+                WebRequest request = WebRequest.Create(server_address + endpoint);
                 request.Method = "POST";
                 using (WebResponse response = request.GetResponse())
                 using (Stream dataStream = response.GetResponseStream())
@@ -23,13 +27,16 @@ namespace AlexCatze.StockManager.Client
             }
             catch (Exception ex)
             {
-                return null;
+                return null;//TODO Throw Error
             }
         }
 
-        public static List<ThingType> GetThingTypes()
+        public static ThingType[] GetThingTypes()
         {
-
+            string res = Request("Api/GetThings");
+            if (res == null) return null;
+            return JsonConvert.DeserializeObject<ThingType[]>(res);
+            //return null;
         }
     }
 }
