@@ -31,11 +31,11 @@ namespace AlexCatze.StockManager.Client
             }
         }
 
-        public static ThingType[] GetThingTypes()
+        public static List<ThingType> GetThingTypes()
         {
             string res = Request("Api/GetThings");
             if (res == null) return null;
-            return JsonConvert.DeserializeObject<ThingType[]>(res);
+            return JsonConvert.DeserializeObject<List<ThingType>>(res);
             //return null;
         }
     }
