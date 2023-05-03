@@ -52,6 +52,7 @@ namespace AlexCatze.StockManager.Client
             this.Menu = this.mainMenu1;
             this.Name = "MainForm";
             this.Text = "Головне меню";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
 
         }

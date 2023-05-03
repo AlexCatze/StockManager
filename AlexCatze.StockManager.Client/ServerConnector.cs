@@ -6,12 +6,13 @@ using Newtonsoft.Json;
 using System.Net;
 using System.IO;
 using System.Windows.Forms;
+using AlexCatze.StockManager.Client.Models;
 
 namespace AlexCatze.StockManager.Client
 {
     class ServerConnector
     {
-        public static string server_address = "http://192.168.0.126:5135/";//TODO Move to config
+        public static string server_address = "";
 
         private static void ShowWebError(Exception ex)
         {
@@ -22,7 +23,7 @@ namespace AlexCatze.StockManager.Client
         {
             try
             {
-                
+                if(!server_address.EndsWith("/")) server_address+="/";
                 WebRequest request = WebRequest.Create(server_address + endpoint);
                 request.Method = "POST";
 
@@ -65,6 +66,13 @@ namespace AlexCatze.StockManager.Client
         public static void DeleteThingType(ThingType type)
         {
             Request("Api/DeleteThing", JsonConvert.SerializeObject(type));
+        }
+
+        public static List<Stock> GetStocks()
+        {
+            string res = Request("Api/GetStocks", null);
+            if (res == null) return null;
+            return JsonConvert.DeserializeObject<List<Stock>>(res);
         }
     }
 }
