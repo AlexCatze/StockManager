@@ -120,6 +120,12 @@
       <DependentUpon>ThingTypesForm.cs</DependentUpon>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="IT-3100_CSLib\IT-3100_CSLib\IT-3100_CsLib.csproj">
+      <Project>{A927FC83-333D-4AE1-B397-8CC3861111EE}</Project>
+      <Name>IT-3100_CsLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Condition="'$(TargetFrameworkVersion)' == 'v1.0'" Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.v1.targets" />
   <Import Condition="'$(TargetFrameworkVersion)' == 'v2.0'" Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
   <ProjectExtensions>

@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexCatze.StockManager.Client", "AlexCatze.StockManager.Client.csproj", "{9948FD35-E891-466B-87EE-B490480E1D9A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IT-3100_CsLib", "IT-3100_CSLib\IT-3100_CSLib\IT-3100_CsLib.csproj", "{A927FC83-333D-4AE1-B397-8CC3861111EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9948FD35-E891-466B-87EE-B490480E1D9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9948FD35-E891-466B-87EE-B490480E1D9A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9948FD35-E891-466B-87EE-B490480E1D9A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A927FC83-333D-4AE1-B397-8CC3861111EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A927FC83-333D-4AE1-B397-8CC3861111EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A927FC83-333D-4AE1-B397-8CC3861111EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A927FC83-333D-4AE1-B397-8CC3861111EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
