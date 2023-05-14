@@ -29,5 +29,39 @@ namespace AlexCatze.StockManager.Client
         {
             new ConnectForm().Show();
         }
+
+        private void ThingTypesForm_GotFocus(object sender, EventArgs e)
+        {
+            if(MyStock == null) return;
+            stock_label.Text = MyStock.Name;
+
+            DataTable table = new DataTable();
+            table.Columns.Add("Тип");
+            table.Columns.Add("Кількість");
+
+            Dictionary<long, int> counts = new Dictionary<long, int>();
+
+            List<Item> items = ServerConnector.GetItemsOnStock(MyStock);
+            if (items != null)
+                foreach (Item i in items)
+                {
+                    if (counts.ContainsKey(i.TypeId))
+                        counts[i.TypeId]++;
+                    else
+                        counts.Add(i.TypeId,1);
+                }
+
+            Dictionary<long,ThingType> types = new Dictionary<long,ThingType>() ;
+
+            foreach (ThingType t in ServerConnector.GetThingTypes())
+                types.Add(t.Id, t);
+
+            foreach (KeyValuePair<long, int> kv in counts)
+            {
+                table.Rows.Add(types[kv.Key], kv.Value);
+            }
+
+            dataGrid1.DataSource = table;
+        }
     }
 }

@@ -100,7 +100,7 @@
             this.Controls.Add(this.check_connect_button);
             this.Menu = this.mainMenu1;
             this.Name = "ConnectForm";
-            this.Text = "ConnectForm";
+            this.Text = "Вхід в систему";
             this.Deactivate += new System.EventHandler(this.ConnectForm_LostFocus);
             this.ResumeLayout(false);
 

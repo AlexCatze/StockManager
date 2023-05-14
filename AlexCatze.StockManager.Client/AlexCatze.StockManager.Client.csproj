@@ -75,6 +75,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Stock.cs" />
     <Compile Include="Models\ThingType.cs" />
     <Compile Include="Program.cs" />
