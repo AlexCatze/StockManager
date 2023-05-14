@@ -1,0 +1,3 @@
+[submodule "AlexCatze.StockManager.Client/IT-3100_CSLib"]
+	path = AlexCatze.StockManager.Client/IT-3100_CSLib
+	url = https://github.com/AlexCatze/IT-3100_CSLib.git
