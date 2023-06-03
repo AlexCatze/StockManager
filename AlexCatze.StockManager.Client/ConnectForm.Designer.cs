@@ -6,7 +6,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.MainMenu mainMenu1;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -29,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.check_connect_button = new System.Windows.Forms.Button();
             this.login_button = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -98,10 +96,9 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.login_button);
             this.Controls.Add(this.check_connect_button);
-            this.Menu = this.mainMenu1;
             this.Name = "ConnectForm";
             this.Text = "Вхід в систему";
-            this.Deactivate += new System.EventHandler(this.ConnectForm_LostFocus);
+            this.Load += new System.EventHandler(this.ConnectForm_Load);
             this.ResumeLayout(false);
 
         }

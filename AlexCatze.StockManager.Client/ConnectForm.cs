@@ -12,8 +12,13 @@ namespace AlexCatze.StockManager.Client
 {
     public partial class ConnectForm : Form
     {
-        public ConnectForm()
+
+        private Form callback;
+
+        public ConnectForm(Form _callback)
         {
+            callback = _callback;
+
             InitializeComponent();
             if(File.Exists("\\server.dat"))
             {
@@ -59,16 +64,18 @@ namespace AlexCatze.StockManager.Client
             login_button.Enabled = true;
         }
 
-        private void ConnectForm_LostFocus(object sender, EventArgs e)
-        {
-            this.Activate();
-        }
-
         private void login_button_Click(object sender, EventArgs e)
         {
             if (listBox1.SelectedItem == null) return;
             MainForm.MyStock = (Stock)listBox1.SelectedItem;
             this.Close();
+            callback.Show();
+        }
+
+        private void ConnectForm_Load(object sender, EventArgs e)
+        {
+            this.Focus();
+            this.Activate();
         }
     }
 }

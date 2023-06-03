@@ -208,7 +208,7 @@ namespace AlexCatze.StockManager.Server.Controllers
             _context.Transactions.Add(new StockTransaction() { StockId = item.StockId, Count = 1, ItemId = item.Id, Timestamp = DateTime.Now }) ;
             await _context.SaveChangesAsync();
 
-            return Ok();
+            return Ok(JsonSerializer.Serialize(item));
         }
 
         [HttpPost("Api/DeleteItem")]

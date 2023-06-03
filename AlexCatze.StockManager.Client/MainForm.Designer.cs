@@ -6,7 +6,6 @@ namespace AlexCatze.StockManager.Client
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.MainMenu mainMenu1;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -29,7 +28,6 @@ namespace AlexCatze.StockManager.Client
         /// </summary>
         private void InitializeComponent()
         {
-            this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.things_types = new System.Windows.Forms.Button();
             this.dataGrid1 = new System.Windows.Forms.DataGrid();
             this.stock_label = new System.Windows.Forms.Label();
@@ -64,9 +62,10 @@ namespace AlexCatze.StockManager.Client
             // 
             this.new_item_button.Location = new System.Drawing.Point(3, 209);
             this.new_item_button.Name = "new_item_button";
-            this.new_item_button.Size = new System.Drawing.Size(72, 20);
+            this.new_item_button.Size = new System.Drawing.Size(89, 20);
             this.new_item_button.TabIndex = 2;
-            this.new_item_button.Text = "New item";
+            this.new_item_button.Text = "Новий товар";
+            this.new_item_button.Click += new System.EventHandler(this.new_item_button_Click);
             // 
             // MainForm
             // 
@@ -78,11 +77,13 @@ namespace AlexCatze.StockManager.Client
             this.Controls.Add(this.stock_label);
             this.Controls.Add(this.dataGrid1);
             this.Controls.Add(this.things_types);
-            this.Menu = this.mainMenu1;
             this.Name = "MainForm";
             this.Text = "Головне меню";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.GotFocus += new System.EventHandler(this.ThingTypesForm_GotFocus);
+            this.Closing += new System.ComponentModel.CancelEventHandler(this.MainForm_Closing);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainForm_KeyDown);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.ResumeLayout(false);
 
         }
