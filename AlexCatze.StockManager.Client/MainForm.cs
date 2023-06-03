@@ -7,6 +7,8 @@ using System.Text;
 using System.Windows.Forms;
 using AlexCatze.StockManager.Client.Models;
 using IT_3100_CsLib;
+using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace AlexCatze.StockManager.Client
 {
@@ -21,7 +23,9 @@ namespace AlexCatze.StockManager.Client
             try
             {
                 CheckStatus(PrinterLib.PRNOpen());
-                
+                CheckStatus(CMOSLib.IMGInit());
+                CheckStatus(CMOSLib.IMGConnect());
+                CheckStatus(CMOSLib.IMGSetCode128(true,10,14));
             }
             catch (Exception e) { }
         }
@@ -29,6 +33,16 @@ namespace AlexCatze.StockManager.Client
         public static void CheckStatus(PrinterLib.PRNStatus status)
         {
             if (status != PrinterLib.PRNStatus.PRN_NORMAL) MessageBox.Show("Printer error: " + status.ToString());
+        }
+
+        public static void CheckStatus(CMOSLib.CMOSStatus status)
+        {
+            if (status != CMOSLib.CMOSStatus.IMG_SUCCESS) MessageBox.Show("CMOS imager error: " + status.ToString());
+        }
+
+        public static void CheckStatus(int status)
+        {
+            if (status != 0) MessageBox.Show("Error: " + status.ToString());
         }
 
         private void things_types_Click(object sender, EventArgs e)
@@ -89,19 +103,36 @@ namespace AlexCatze.StockManager.Client
             try
             {
                 CheckStatus(PrinterLib.PRNClose());
-
+                CheckStatus(CMOSLib.IMGDisconnect());
+                CheckStatus(CMOSLib.IMGDeinit());
             }
             catch (Exception ex) { }
         }
 
-        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        public delegate Int32 ScanerCallbackDelegate();
+
+        public Int32 ScanerCallback()
         {
-            MessageBox.Show(e.KeyCode.ToString());
+            return 1;
         }
 
-        private void MainForm_KeyDown(object sender, KeyPressEventArgs e)
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
-            MessageBox.Show(e.KeyChar.ToString());
+            if(MyStock==null)return;
+            if (e.KeyCode == Keys.F21 || e.KeyCode == Keys.F24)
+            {
+                string pMessage, pCodeID, pAimID, pSymModifier;
+                int pLength;
+                byte[] data;
+                ScanerCallbackDelegate del = new ScanerCallbackDelegate(ScanerCallback);
+                CheckStatus(CMOSLib.IMGGetImage(out data, 640, 480, CMOSLib.ImageFormat.IMAGE_256MONO, 0));
+                int res = CMOSLib.IMGWaitForDecode(1000, out pMessage, out pCodeID, out pAimID, out pSymModifier, out pLength, Marshal.GetFunctionPointerForDelegate(del));
+                if (res == 10) return;
+                CheckStatus(res);
+                if (res != 0) return;
+
+                MessageBox.Show(pMessage);
+            }
         }
     }
 }

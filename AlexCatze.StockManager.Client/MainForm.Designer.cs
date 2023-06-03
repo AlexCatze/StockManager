@@ -55,8 +55,8 @@ namespace AlexCatze.StockManager.Client
             // 
             this.stock_label.Location = new System.Drawing.Point(3, 235);
             this.stock_label.Name = "stock_label";
-            this.stock_label.Size = new System.Drawing.Size(100, 20);
-            this.stock_label.Text = "label1";
+            this.stock_label.Size = new System.Drawing.Size(128, 20);
+            this.stock_label.Text = "Немає з\'єднання";
             // 
             // new_item_button
             // 
@@ -77,12 +77,12 @@ namespace AlexCatze.StockManager.Client
             this.Controls.Add(this.stock_label);
             this.Controls.Add(this.dataGrid1);
             this.Controls.Add(this.things_types);
+            this.KeyPreview = true;
             this.Name = "MainForm";
             this.Text = "Головне меню";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.GotFocus += new System.EventHandler(this.ThingTypesForm_GotFocus);
             this.Closing += new System.ComponentModel.CancelEventHandler(this.MainForm_Closing);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainForm_KeyDown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.ResumeLayout(false);
 
