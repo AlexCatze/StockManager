@@ -6,7 +6,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.MainMenu mainMenu1;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -29,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.back_button = new System.Windows.Forms.Button();
             this.save_button = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -105,9 +103,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.save_button);
             this.Controls.Add(this.back_button);
-            this.Menu = this.mainMenu1;
             this.Name = "ThingTypeForm";
-            this.Text = "ThingTypeForm";
+            this.Text = "Перегляд типу товару";
             this.ResumeLayout(false);
 
         }

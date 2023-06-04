@@ -131,7 +131,18 @@ namespace AlexCatze.StockManager.Client
                 CheckStatus(res);
                 if (res != 0) return;
 
-                MessageBox.Show(pMessage);
+                Item item = ServerConnector.GetItem(new Item { Id = int.Parse(pMessage) });
+
+                if (item == null)
+                {
+                    MessageBox.Show("Не вдалося знайти запис № " + pMessage);
+                    return;
+                }
+                else
+                {
+                    new ItemViewForm(item).Show();
+
+                }
             }
         }
     }

@@ -58,6 +58,13 @@ namespace AlexCatze.StockManager.Client
             return JsonConvert.DeserializeObject<List<ThingType>>(res);
         }
 
+        public static ThingType GetThingType(ThingType pattern)
+        {
+            string res = Request("Api/GetThing", JsonConvert.SerializeObject(pattern));
+            if (res == null) return null;
+            return JsonConvert.DeserializeObject<ThingType>(res);
+        }
+
         public static void AddThingType(ThingType type)
         {
             Request("Api/AddThing",JsonConvert.SerializeObject(type));
@@ -87,6 +94,32 @@ namespace AlexCatze.StockManager.Client
             string res = Request("Api/CreateItem", JsonConvert.SerializeObject(type));
             if (res == null) return null;
             return JsonConvert.DeserializeObject<Item>(res);
+        }
+
+        public static Item GetItem(Item type)
+        {
+            string res = Request("Api/GetItem", JsonConvert.SerializeObject(type));
+            if (res == null) return null;
+            return JsonConvert.DeserializeObject<Item>(res);
+        }
+
+        public static List<ItemTransaction> GetItemTransactions(Item item)
+        {
+            string res = Request("Api/GetItemTransactions", JsonConvert.SerializeObject(item));
+            if (res == null) return null;
+            return JsonConvert.DeserializeObject<List<ItemTransaction>>(res);
+        }
+
+        public static void DeleteItem(Item type)
+        {
+            Request("Api/DeleteItem", JsonConvert.SerializeObject(type));
+        }
+
+        public static Stock GetStock(Stock type)
+        {
+            string res = Request("Api/GetStock", JsonConvert.SerializeObject(type));
+            if (res == null) return null;
+            return JsonConvert.DeserializeObject<Stock>(res);
         }
     }
 }

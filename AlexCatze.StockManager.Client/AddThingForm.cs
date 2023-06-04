@@ -7,6 +7,8 @@ using System.Text;
 using System.Windows.Forms;
 using AlexCatze.StockManager.Client.Models;
 using IT_3100_CsLib;
+using System.IO;
+using System.Reflection;
 
 namespace AlexCatze.StockManager.Client
 {
@@ -40,6 +42,18 @@ namespace AlexCatze.StockManager.Client
                 while (barcode.Length < 12)
                     barcode = "0"+barcode;
                 MainForm.CheckStatus(PrinterLib.PRNBarcodeOut(PrinterLib.codeType.Code128, 20, true, PrinterLib.fontType.ANK8x16, 0, PrinterLib.direction.VERTICAL, barcode));
+
+                string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase), "logo.bin");
+
+                if (File.Exists(path))
+                {
+                    FileStream file = File.OpenRead(path);
+                    byte[] data = new byte[(int)file.Length];
+                    file.Read(data, 0, (int)file.Length);
+                    file.Close();
+                    if (data.Length % 72 == 0)
+                        MainForm.CheckStatus(PrinterLib.PRNImageOut(72, (uint)(data.Length / 72), 10, data));
+                }
 
                 MainForm.CheckStatus(PrinterLib.SkipLines(3));
             }

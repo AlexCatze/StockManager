@@ -6,7 +6,6 @@ namespace AlexCatze.StockManager.Client
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.MainMenu mainMenu1;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -29,7 +28,6 @@ namespace AlexCatze.StockManager.Client
         /// </summary>
         private void InitializeComponent()
         {
-            this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.back = new System.Windows.Forms.Button();
             this.dataGrid1 = new System.Windows.Forms.DataGrid();
             this.delete_button = new System.Windows.Forms.Button();
@@ -92,9 +90,8 @@ namespace AlexCatze.StockManager.Client
             this.Controls.Add(this.delete_button);
             this.Controls.Add(this.dataGrid1);
             this.Controls.Add(this.back);
-            this.Menu = this.mainMenu1;
             this.Name = "ThingTypesForm";
-            this.Text = "ThingTypesForm";
+            this.Text = "Типи товару";
             this.GotFocus += new System.EventHandler(this.ThingTypesForm_GotFocus);
             this.ResumeLayout(false);
 

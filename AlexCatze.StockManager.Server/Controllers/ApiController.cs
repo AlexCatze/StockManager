@@ -174,7 +174,7 @@ namespace AlexCatze.StockManager.Server.Controllers
         }
 
         [HttpPost("Api/CreateItem")]
-        public async Task<IActionResult> CreateItem(CancellationToken cancellationToken = default)
+        public async Task<IActionResult> CreateItem(CancellationToken cancellationToken = default)     
         {
 
             string body;
@@ -194,17 +194,19 @@ namespace AlexCatze.StockManager.Server.Controllers
                 return BadRequest();
             }
 
-            if(!await _context.Stocks.Where(s=>s.Id==item.StockId).AnyAsync()) return BadRequest();
+            if((!await _context.Stocks.Where(s=>s.Id==item.StockId).AnyAsync())&& item.StockId !=-1) return BadRequest();
             if(!await _context.Things.Where(s=>s.Id==item.TypeId).AnyAsync()) return BadRequest();
 
             var exist = await _context.Items.Where(t => t.Id == item.Id).FirstOrDefaultAsync();
             if (exist != null)
             {
-                _context.Transactions.Add(new StockTransaction() { StockId = exist.StockId, Count = -1, ItemId = item.Id, Timestamp = DateTime.Now });
+                if(exist.StockId>=0)
+                    _context.Transactions.Add(new StockTransaction() { StockId = exist.StockId, Count = -1, ItemId = item.Id, Timestamp = DateTime.Now });
                 exist.StockId = item.StockId;
             }
             else 
                 _context.Items.Add(item);
+            await _context.SaveChangesAsync();
             _context.Transactions.Add(new StockTransaction() { StockId = item.StockId, Count = 1, ItemId = item.Id, Timestamp = DateTime.Now }) ;
             await _context.SaveChangesAsync();
 
@@ -228,8 +230,9 @@ namespace AlexCatze.StockManager.Server.Controllers
 
             if (result == null) { return BadRequest(); }
 
-            _context.Items.Remove(result);
             _context.Transactions.Add(new StockTransaction() { StockId = result.StockId, Count = -1, ItemId = result.Id, Timestamp = DateTime.Now });
+            //_context.Items.Remove(result);
+            result.StockId = -1;
             await _context.SaveChangesAsync();
 
             return Ok();
@@ -249,6 +252,42 @@ namespace AlexCatze.StockManager.Server.Controllers
             catch (Exception ex) { return BadRequest(); }
 
             var result = await _context.Items.Where(t => t.StockId == thing.Id).ToListAsync();
+
+            return Ok(JsonSerializer.Serialize(result));
+        }
+
+        [HttpPost("Api/GetItem")]
+        public async Task<IActionResult> GetItem(CancellationToken cancellationToken = default)
+        {
+            string body;
+            using (var reader = new StreamReader(Request.Body))
+                body = await reader.ReadToEndAsync();
+            Item thing;
+            try
+            {
+                thing = JsonSerializer.Deserialize<Item>(body);
+            }
+            catch (Exception ex) { return BadRequest(); }
+
+            var result = await _context.Items.Where(t => t.Id == thing.Id).FirstOrDefaultAsync();
+
+            return Ok(JsonSerializer.Serialize(result));
+        }
+
+        [HttpPost("Api/GetItemTransactions")]
+        public async Task<IActionResult> GetItemTransactions(CancellationToken cancellationToken = default)
+        {
+            string body;
+            using (var reader = new StreamReader(Request.Body))
+                body = await reader.ReadToEndAsync();
+            Item thing;
+            try
+            {
+                thing = JsonSerializer.Deserialize<Item>(body);
+            }
+            catch (Exception ex) { return BadRequest(); }
+
+            var result = await _context.Transactions.Where(t => t.ItemId == thing.Id).ToListAsync();
 
             return Ok(JsonSerializer.Serialize(result));
         }
