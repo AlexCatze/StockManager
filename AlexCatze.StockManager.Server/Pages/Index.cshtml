@@ -1,10 +1,47 @@
 ﻿@page
 @model IndexModel
+@using Models
+@inject DatabaseContext db
 @{
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<table border="2">
+    <tr><th>Склади</th><th>Типи товарів</th></tr>
+    <tr>
+        <td>
+            <h2>Додати</h2>
+            <form method="POST" action="/Admin/AddStock" >
+                <label>Назва: </label>
+                <input type="text" name="name" id="name" />
+                <input type="submit"/>
+            </form>
+            <table border="1" width="100%">
+                <tr><th>Назва</th><th>ID</th><th>Дії</th></tr>
+                @foreach(Stock stock in db.Stocks)
+                {
+                    <tr><td>@stock.Name</td><td>@stock.Id</td><td><a href="/Admin/RemoveStock?id=@(stock.Id)">Видалити</a></td></tr>
+                }
+            </table>
+        </td>
+        <td>
+            <h2>Додати</h2>
+            <form method="POST" action="/Admin/AddType" enctype="multipart/form-data">
+                <label>Назва: </label>
+                <input type="text" name="name" id="name" />
+                <label>Опис: </label>
+                <input type="text" name="desc" id="desc" />
+                <label>Зображення: </label>
+                <input type="file" name="img" id="img" />
+                <input type="submit"/>
+            </form>
+            <table border="1" width="100%">
+                <tr><th>Назва</th><th>Опис</th><th>ID</th><th>Зображення</th><th>Дії</th></tr>
+                @foreach(ThingType type in db.Things)
+                {
+                    <tr><td>@type.Name</td><td>@type.Description</td><td>@type.Id</td><td><a href="/Admin/GetImage?id=@(type.Id)" target="_blank">Відкрити</a></td><td><a href="/Admin/RemoveType?id=@(type.Id)">Видалити</a></td></tr>
+                }
+            </table>
+        </td>
+    </tr>
+</table>
