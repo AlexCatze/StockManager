@@ -66,5 +66,10 @@ namespace AlexCatze.StockManager.Client
         {
             Refresh();
         }
+
+        private void report_button_Click(object sender, EventArgs e)
+        {
+            new ReportForm(types[dataGrid1.CurrentCell.RowNumber]).Show();
+        }
     }
 }

@@ -33,11 +33,12 @@ namespace AlexCatze.StockManager.Client
             this.delete_button = new System.Windows.Forms.Button();
             this.about_button = new System.Windows.Forms.Button();
             this.new_button = new System.Windows.Forms.Button();
+            this.report_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // back
             // 
-            this.back.Location = new System.Drawing.Point(163, 235);
+            this.back.Location = new System.Drawing.Point(163, 234);
             this.back.Name = "back";
             this.back.Size = new System.Drawing.Size(72, 20);
             this.back.TabIndex = 0;
@@ -79,12 +80,22 @@ namespace AlexCatze.StockManager.Client
             this.new_button.Text = "Новий";
             this.new_button.Click += new System.EventHandler(this.new_button_Click);
             // 
+            // report_button
+            // 
+            this.report_button.Location = new System.Drawing.Point(85, 234);
+            this.report_button.Name = "report_button";
+            this.report_button.Size = new System.Drawing.Size(72, 20);
+            this.report_button.TabIndex = 5;
+            this.report_button.Text = "Звіт";
+            this.report_button.Click += new System.EventHandler(this.report_button_Click);
+            // 
             // ThingTypesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(238, 258);
+            this.Controls.Add(this.report_button);
             this.Controls.Add(this.new_button);
             this.Controls.Add(this.about_button);
             this.Controls.Add(this.delete_button);
@@ -104,5 +115,6 @@ namespace AlexCatze.StockManager.Client
         private System.Windows.Forms.Button delete_button;
         private System.Windows.Forms.Button about_button;
         private System.Windows.Forms.Button new_button;
+        private System.Windows.Forms.Button report_button;
     }
 }

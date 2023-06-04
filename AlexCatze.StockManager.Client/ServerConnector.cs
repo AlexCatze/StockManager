@@ -121,5 +121,12 @@ namespace AlexCatze.StockManager.Client
             if (res == null) return null;
             return JsonConvert.DeserializeObject<Stock>(res);
         }
+
+        public static List<ItemTransaction> GetTypeStockTransactions(StockType item)
+        {
+            string res = Request("Api/GetTypeStockTransactions", JsonConvert.SerializeObject(item));
+            if (res == null) return null;
+            return JsonConvert.DeserializeObject<List<ItemTransaction>>(res);
+        }
     }
 }

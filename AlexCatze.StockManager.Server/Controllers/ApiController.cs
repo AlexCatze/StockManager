@@ -291,5 +291,23 @@ namespace AlexCatze.StockManager.Server.Controllers
 
             return Ok(JsonSerializer.Serialize(result));
         }
+
+        [HttpPost("Api/GetTypeStockTransactions")]
+        public async Task<IActionResult> GetTypeStockTransactions(CancellationToken cancellationToken = default)
+        {
+            string body;
+            using (var reader = new StreamReader(Request.Body))
+                body = await reader.ReadToEndAsync();
+            TypeStock thing;
+            try
+            {
+                thing = JsonSerializer.Deserialize<TypeStock>(body);
+            }
+            catch (Exception ex) { return BadRequest(); }
+
+            var result = await _context.Transactions.Where(t => t.StockId==thing.Stock.Id && _context.Items.FirstOrDefault(i=>i.Id==t.ItemId).TypeId == thing.ThingType.Id).ToListAsync();
+
+            return Ok(JsonSerializer.Serialize(result));
+        }
     }
 }
