@@ -13,7 +13,6 @@ jobs:
           args: >-
             --from markdown
             --to docx
-            --embed-resources
             --reference-doc .\Docs\_template.docx
             --resource-path=.\Docs\Description\
             -s .\Docs\Description\README.md
