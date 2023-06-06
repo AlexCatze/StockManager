@@ -21,6 +21,8 @@ jobs:
       - uses: docker://pandoc/core:2.9
         with:
           args: >-
+            --to docx
+            --reference-doc ./Docs/Description/_template.docx
             -s ./Docs/Description/_template.docx Description_body.docx
             -o Description.docx
           
