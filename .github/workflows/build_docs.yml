@@ -11,15 +11,14 @@ jobs:
       - uses: docker://pandoc/core:2.9
         with:
           args: >-
-          --from markdown
-          --to docx
-          --embed-resources
-          --reference-doc .\Docs\_template.docx
-          --resource-path=.\Docs\Description\
-          -s .\Docs\Description\README.md
-          -o Description.docx
+            --from markdown
+            --to docx
+            --resource-path=./Docs/Description/
+            --reference-doc ./Docs/Description/_template.docx
+            -s ./Docs/Description/README.md
+            -o Description.docx
           
       - uses: actions/upload-artifact@v3
         with:
-        name: my-artifact
-        path: Description.docx
+          name: Description
+          path: Description.docx
