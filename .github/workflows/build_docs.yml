@@ -15,9 +15,9 @@ jobs:
           args: >-
             --from markdown
             --to docx
-            --reference-doc _template.docx
+            --reference-doc ./_template.docx
             --resource-path=./
-            -s README.md
+            -s ./README.md
             -o Description.docx
           
       - uses: actions/upload-artifact@v3
