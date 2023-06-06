@@ -16,6 +16,12 @@ jobs:
             --resource-path=./Docs/Description/
             --reference-doc ./Docs/Description/_template.docx
             -s ./Docs/Description/README.md
+            -o Description_body.docx
+            
+      - uses: docker://pandoc/core:2.9
+        with:
+          args: >-
+            -s ./Docs/Description/_template.docx Description_body.docx
             -o Description.docx
           
       - uses: actions/upload-artifact@v3
