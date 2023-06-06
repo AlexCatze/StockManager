@@ -8,14 +8,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
     
+      - run: cd ./Docs/Description/
+    
       - uses: docker://pandoc/core:2.9
         with:
           args: >-
             --from markdown
             --to docx
-            --reference-doc .\Docs\_template.docx
-            --resource-path=.\Docs\Description\
-            -s .\Docs\Description\README.md
+            --reference-doc _template.docx
+            --resource-path=./
+            -s README.md
             -o Description.docx
           
       - uses: actions/upload-artifact@v3
